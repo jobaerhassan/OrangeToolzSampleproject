@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SampleProject</string>
+    <string name="login">Login</string>
+    <string name="signin">Sign In</string>
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+    <string name="fgpassword">Forget Password?</string>
+</resources>
