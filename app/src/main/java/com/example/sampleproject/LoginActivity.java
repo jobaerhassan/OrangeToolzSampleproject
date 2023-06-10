@@ -46,15 +46,17 @@ public class LoginActivity extends AppCompatActivity {
     private void authenticate() {
         String userName = user.getText().toString();
         String passWord = pass.getText().toString();
-        if(userName.equals(USER) && passWord.equals(PASS)){
-            Toast.makeText(this, "Welcome to the Activity", Toast.LENGTH_SHORT).show();
-            Intent intent =new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
-
-        }
-        else{
-            Toast.makeText(this, "Wrong Password!!", Toast.LENGTH_SHORT).show();
-        }
+//        if(userName.equals(USER) && passWord.equals(PASS)){
+//            Toast.makeText(this, "Welcome to the Activity", Toast.LENGTH_SHORT).show();
+//            Intent intent =new Intent(LoginActivity.this, MainActivity.class);
+//            startActivity(intent);
+//
+//        }
+//        else{
+//            Toast.makeText(this, "Wrong Password!!", Toast.LENGTH_SHORT).show();
+//        }
+        Intent intent =new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
 
     }
 

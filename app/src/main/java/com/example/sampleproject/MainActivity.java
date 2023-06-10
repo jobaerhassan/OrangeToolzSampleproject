@@ -11,23 +11,38 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    RecyclerView recyclerView;
+
     CustomAdapter adapter;
-    ArrayList
+    ArrayList<Item>itemArrayList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setRecyclerView();
+        RecyclerView recyclerView;
+        recyclerView = findViewById(R.id.recycler);
+//        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+        arrayInitialize();
+
+        adapter = new CustomAdapter(this, itemArrayList);
+        recyclerView.setAdapter(adapter);
 
     }
 
+    private void arrayInitialize() {
+        Item item = new Item(R.drawable.brand1,"Company" , "this is good");
+        itemArrayList.add(item);
+        itemArrayList.add(item);
+        itemArrayList.add(item);
+        itemArrayList.add(item);
+        itemArrayList.add(item);
+    }
+
     private void setRecyclerView() {
-        recyclerView = findViewById(R.id.recycler);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,1));
-        adapter = new CustomAdapter();
-        recyclerView.setAdapter(adapter);
+
+
     }
 }
