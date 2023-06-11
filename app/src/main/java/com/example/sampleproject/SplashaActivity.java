@@ -23,7 +23,10 @@ public class SplashaActivity extends AppCompatActivity {
             public void run() {
                 Intent toMainActivity = new Intent(SplashaActivity.this, LoginActivity.class);
                 startActivity(toMainActivity);
+                finish();
             }
+
         },3000);//3 sec delay
+
     }
 }

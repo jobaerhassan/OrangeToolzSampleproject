@@ -21,10 +21,10 @@ public interface ItemDAO {
     @Delete
     public void deleteItem(Item item);
 
-    @Query("select * from person")
+    @Query("select * from item")
     public List<Item> getAllItem();
 
-    @Query("select * from person where person_id==:id")
+    @Query("select * from item where item_id==:id")
     public Item getItem(int id);
 
 

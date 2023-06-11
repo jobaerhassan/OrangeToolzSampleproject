@@ -18,6 +18,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder> {
         this.itemList = list;
     }
 
+
+
     @NonNull
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

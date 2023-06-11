@@ -1,9 +1,11 @@
 package com.example.sampleproject.RoomDatabase;
 
 import androidx.room.ColumnInfo;
+import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+@Entity(tableName = "item")
 public class Item {
 
 
@@ -18,7 +20,7 @@ public class Item {
     String desc;
 
     @Ignore
-    public Item(){
+    public Item(int brand1, String company, String executor_hangover){
 
     }
 
