@@ -15,10 +15,14 @@ import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sampleproject.RoomDatabase.ForItemDatabase;
 import com.example.sampleproject.RoomDatabase.Item;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
@@ -30,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     CustomAdapter adapter;
     ArrayList<com.example.sampleproject.Item>itemArrayList = new ArrayList<>();
     ForItemDatabase database;
-    FloatingActionButton fl;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +43,17 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView;
         recyclerView = findViewById(R.id.recycler);
-//        recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        //fab button initialization
+        FloatingActionButton fl;
         fl = findViewById(R.id.addingBtn);
         arrayInitialize();
+        adapter = new CustomAdapter(this, itemArrayList );
+        recyclerView.setAdapter(adapter);
 
+        initializeDB();
 
         //setting the dialog box with FAB button
         final Dialog dialog = new Dialog(this, androidx.appcompat.R.style.Theme_AppCompat_Light_Dialog_Alert);
@@ -53,6 +63,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                addInfo();
                 dialog.show();
+                TextView title,desc;
+                Button add;
+                add = dialog.findViewById(R.id.btnAddToDB);
+                title = dialog.findViewById(R.id.addItemTitle);
+                desc = dialog.findViewById(R.id.additemDesc);
+
+                add.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        addSomevalueToDB(title.getText().toString(),desc.getText().toString());
+                        dialog.dismiss();
+                    }
+                });
             }
 
 
@@ -61,14 +84,20 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//        adapter = new CustomAdapter(this, itemArrayList );
-//        recyclerView.setAdapter(adapter);
-//        initializeDB();
+
+
+
 
 
     }
 
-    private void setDialog() {
+    private void addSomevalueToDB(String title, String desc) {
+
+        setDataInBackground(new Item(title,desc));
+
+    }
+
+    // private void setDialog() {
 
 
 //        EditText title, desc;
@@ -88,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
 //            dialog.show();
 
-    }
+    //}
 
     private void initializeDB() {
         RoomDatabase.Callback myCallBack = new RoomDatabase.Callback() {
@@ -119,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
 
                 //background  tasking
-
+                database.getItemDao().addItem(item);
 
 
                 //on finishing the given task
@@ -127,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
 
+                        Toast.makeText(MainActivity.this, "added to database", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -138,7 +168,6 @@ public class MainActivity extends AppCompatActivity {
     private void arrayInitialize() {
         com.example.sampleproject.Item item = new com.example.sampleproject.Item(R.drawable.brand1,"dfdfad","adfadf");
         itemArrayList.add(item);
-//        setDataInBackground(new Item("adfadf","adfasdfa"));
 
 
     }
