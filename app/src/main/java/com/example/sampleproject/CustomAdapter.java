@@ -7,15 +7,27 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sampleproject.RoomDatabase.Item;
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder> {
      Context context;
      ArrayList<Item> itemList;
 
-    public CustomAdapter(Context context, ArrayList<Item>list) {
+    public CustomAdapter(Context context) {
         this.context = context;
-        this.itemList = list;
+        itemList = new ArrayList<Item>();
+    }
+    public void addItem(Item item)
+    {
+        itemList.add(item);
+        notifyDataSetChanged();
+    }
+    public void removeItem(int id, int pos)
+    {
+
     }
 
 
@@ -29,13 +41,20 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
-        holder.text_title.setText(itemList.get(position).title);
-        holder.text_source.setText(itemList.get(position).description);
-        holder.img.setImageResource(itemList.get(position).img);
+        holder.text_title.setText(itemList.get(position).getTitle());
+        holder.text_desc.setText(itemList.get(position).getDesc());
+        if(itemList.get(position).getImgLink()!=null)
+        {
+            Picasso.get().load(itemList.get(position).getImgLink()).into(holder.img);
+        }
     }
 
     @Override
     public int getItemCount() {
         return itemList.size();
+    }
+
+    public void setItemList(ArrayList<Item> itemList) {
+        this.itemList = itemList;
     }
 }

@@ -19,17 +19,18 @@ public class Item {
     @ColumnInfo(name = "desc")
     String desc;
 
-    @Ignore
-    public Item(int brand1, String company, String executor_hangover){
+    @ColumnInfo(name = "imgLink")
+    String imgLink;
 
-    }
 
-    public Item(String title, String desc)
-    {
+    public Item(String title, String desc, String imgLink){
+
         this.title = title;
         this.desc = desc;
-        this.id = 0;
+        this.imgLink = imgLink;
     }
+
+
 
     public int getId() {
         return id;
@@ -53,5 +54,13 @@ public class Item {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getImgLink() {
+        return imgLink;
+    }
+
+    public void setImgLink(String imgLink) {
+        this.imgLink = imgLink;
     }
 }

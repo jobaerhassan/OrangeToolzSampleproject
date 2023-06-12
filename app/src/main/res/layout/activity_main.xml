@@ -7,6 +7,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <LinearLayout
         android:orientation="vertical"
@@ -17,6 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </LinearLayout>
+
+    </ScrollView>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addingBtn"
         android:src="@drawable/baseline_add_24"
