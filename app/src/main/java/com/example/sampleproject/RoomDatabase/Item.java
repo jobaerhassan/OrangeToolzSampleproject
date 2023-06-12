@@ -30,6 +30,15 @@ public class Item {
         this.imgLink = imgLink;
     }
 
+    @Ignore
+    public Item (int id, String title, String desc, String imgLink)
+    {
+        this.id = id;
+        this.title = title;
+        this.desc = desc;
+        this.imgLink = imgLink;
+    }
+
 
 
     public int getId() {

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class CustomViewHolder extends RecyclerView.ViewHolder {
     TextView text_title, text_desc;
     ImageView img;
-//    CardView cardView;
+    CardView cardView;
     public CustomViewHolder(@NonNull View itemView) {
         super(itemView);
 
@@ -19,5 +19,6 @@ public class CustomViewHolder extends RecyclerView.ViewHolder {
         text_title = itemView.findViewById(R.id.textTitle);
         text_desc = itemView.findViewById(R.id.textDesc);
         img = itemView.findViewById(R.id.img_headline);
+        cardView = itemView.findViewById(R.id.main_container);
     }
 }

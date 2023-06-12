@@ -31,13 +31,13 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterListener {
 
     RecyclerView recyclerView;
     FloatingActionButton fl;
-    private ForItemDatabase database;
-    private ItemDAO itemDAO;
-    private CustomAdapter itemAdapter;
+    public ForItemDatabase database;
+    public  ItemDAO itemDAO;
+    public CustomAdapter itemAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         database = ForItemDatabase.getInstance(this);
         itemDAO = database.getItemDao();
         recyclerView = findViewById(R.id.recycler);
-        itemAdapter = new CustomAdapter(this);
+        itemAdapter = new CustomAdapter(this,this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(itemAdapter);
 
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         fl = findViewById(R.id.addingBtn);
 
-        fetchData();
+//        fetchData();
 
         final Dialog dialog = new Dialog(this, androidx.appcompat.R.style.Theme_AppCompat_Light_Dialog_Alert);
         dialog.setContentView(R.layout.add_item);
@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void fetchData()
     {
+
         Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
@@ -108,6 +109,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+    @Override
+    public void OnUpdate(Item item) {
+        itemDAO.updateItem(item);
+    }
+
+    @Override
+    public void OnDelete(Item item,int position) {
+        itemDAO.deleteItem(item);
+        itemAdapter.removeItem(position);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fetchData();
+    }
 }
 
 
